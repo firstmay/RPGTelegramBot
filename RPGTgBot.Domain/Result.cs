@@ -1,4 +1,6 @@
-﻿namespace RPGTgBot.Domain
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace RPGTgBot.Domain
 {
     public class Result
     {
@@ -30,6 +32,12 @@
 
         public static Result<T> Ok(T value) => new(true, string.Empty, value);
         public static Result<T> Fail (string error) => new(false, ResultPattern.ValidateErrorMsg(error), default);
+
+        [MemberNotNullWhen(true,nameof(Value))]
+        public bool IsSuccessAndNotNull()
+        {
+            return IsSuccess && Value != null;
+        }
     }
 
     public static class ResultPattern
