@@ -9,7 +9,7 @@
         public DateTime RegistrationDate { get; private set; }
 
 
-        private Player(int id,long telegramId, string name, DateTime registrationDate)
+        private Player(int id ,long telegramId, string name, DateTime registrationDate)
         {
             Id = id;
             TelegramId = telegramId;
