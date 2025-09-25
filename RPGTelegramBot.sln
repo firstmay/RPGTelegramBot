@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36127.28 d17.14
+VisualStudioVersion = 17.14.36127.28
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPGTgBot.Application", "RPGTgBot.Application\RPGTgBot.Application.csproj", "{AC3C68E5-40EB-46F6-AC7F-A32602BDC1CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPGTgBot.Infrastructure", "RPGTgBot.Infrastructure\RPGTgBot.Infrastructure.csproj", "{1C9700BA-D6EE-4269-BD12-0643A0BD56CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPGTgBot.Presentation", "RPGTgBot.Presentation\RPGTgBot.Presentation.csproj", "{B3BA93A9-9315-46C0-8BE9-A12746C328C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{1C9700BA-D6EE-4269-BD12-0643A0BD56CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C9700BA-D6EE-4269-BD12-0643A0BD56CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C9700BA-D6EE-4269-BD12-0643A0BD56CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3BA93A9-9315-46C0-8BE9-A12746C328C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3BA93A9-9315-46C0-8BE9-A12746C328C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3BA93A9-9315-46C0-8BE9-A12746C328C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3BA93A9-9315-46C0-8BE9-A12746C328C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{04731098-41B8-4B2C-8FC3-9502B235EB6F} = {13D03829-2C28-4AD7-A097-4403BE289627}
 		{AC3C68E5-40EB-46F6-AC7F-A32602BDC1CE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{1C9700BA-D6EE-4269-BD12-0643A0BD56CA} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{B3BA93A9-9315-46C0-8BE9-A12746C328C0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B35DF3AE-DE96-49D7-9476-FF7CB865EB02}
