@@ -7,8 +7,9 @@ using Telegram.Bot.Types.Enums;
 namespace RPGTgBot.Infrastructure.TelegramBot.Services
 {
     
-    public class HandlerUpdate : IHandlerUpdate
+    public class HandlerUpdate(IMessageHandler messageHandler) : IHandlerUpdate
     {
+        private readonly IMessageHandler _MessageHandler = messageHandler;
         public Task HandleErrorAsync(ITelegramBotClient client, Exception exception, CancellationToken token)
         {
             var error = exception switch
@@ -25,7 +26,11 @@ namespace RPGTgBot.Infrastructure.TelegramBot.Services
             switch (update.Type)
             {
                 case UpdateType.Message:
-                    await botClient.SendMessage(update.Message!.Chat.Id, update.Message.Text!);
+                    if(update.Message != null)
+                    {
+                        await _MessageHandler.HandleAsync(botClient, update.Message, cancellationToken);
+                    }
+                    //await botClient.SendMessage(update.Message!.Chat.Id, update.Message.Text!);
                     break;
             }
         }
