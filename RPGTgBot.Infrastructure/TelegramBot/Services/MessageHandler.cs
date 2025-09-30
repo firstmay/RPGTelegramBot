@@ -1,12 +1,17 @@
 ﻿using RPGTgBot.Infrastructure.TelegramBot.Interfaces;
 using RPGTgBot.Infrastructure.TelegramBot.Menu;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace RPGTgBot.Infrastructure.TelegramBot.Services
 {
-    public class MessageHandler(IMenuManager menuManager) : IMessageHandler
+    public class MessageHandler(
+        ITelegramBotClient client, 
+        IMenuManager menuManager
+        ) : IMessageHandler
     {
+        private readonly ITelegramBotClient _client = client;
         private readonly IMenuManager _menuManager = menuManager;
 
         public async Task HandleAsync(ITelegramBotClient client, Message update, CancellationToken token)
@@ -39,7 +44,15 @@ namespace RPGTgBot.Infrastructure.TelegramBot.Services
                 case "/start":
                     await _menuManager.SwitchToMenuAsync<MainMenu>(chatId);
                     break;
+                default:
+                    await SendMessage(chatId, "Неизвестная команда");
+                    break;
             }
+        }
+
+        private async Task SendMessage(long chatId, string message)
+        {
+            await _client.SendMessage(chatId, message);
         }
     }
 }

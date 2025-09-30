@@ -1,6 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
+using RPGTgBot.Application.Interfaces;
 using RPGTgBot.Infrastructure.DataBaseContext;
+using RPGTgBot.Infrastructure.Repositories;
 using RPGTgBot.Infrastructure.TelegramBot.Interfaces;
 using RPGTgBot.Infrastructure.TelegramBot.Menu;
 using RPGTgBot.Infrastructure.TelegramBot.Models;
@@ -33,6 +35,14 @@ namespace RPGTgBot.Presentation
             builder.Services.AddScoped<MainMenu>();
             // Add services to the container.
 
+            builder.Services.AddScoped<IPlayerRepo, PlayerRepository>();
+
+            builder.Services.Scan(scan => scan
+                .FromApplicationDependencies()
+                .AddClasses(classes => classes.AssignableTo(typeof(IQueryHandler<,>)))
+                    .AsSelf()
+                    .WithScopedLifetime()
+                    );
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
