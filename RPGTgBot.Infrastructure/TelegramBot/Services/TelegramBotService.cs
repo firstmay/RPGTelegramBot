@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using RPGTgBot.Infrastructure.TelegramBot.Interfaces;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
@@ -8,10 +9,10 @@ using Telegram.Bot.Types.Enums;
 
 namespace RPGTgBot.Infrastructure.TelegramBot.Services
 {
-    public class TelegramBotService(ITelegramBotClient botClient, IServiceProvider serviceProvider, IHandlerUpdate handlerUpdate) : BackgroundService
+    public class TelegramBotService(ITelegramBotClient botClient, IServiceProvider serviceProvider, IServiceScopeFactory scopeFactory) : BackgroundService
     {
         private readonly ITelegramBotClient _botClient = botClient;
-        private readonly IHandlerUpdate _handlerUpdate = handlerUpdate;
+        private readonly IServiceScopeFactory _serviceScopeFactory = scopeFactory;
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -22,7 +23,10 @@ namespace RPGTgBot.Infrastructure.TelegramBot.Services
                 AllowedUpdates = Array.Empty<UpdateType>()
             };
 
-            await _botClient.ReceiveAsync(_handlerUpdate.HandleUpdateAsync, _handlerUpdate.HandleErrorAsync,receiverOptions, stoppingToken);
+            using var scope = _serviceScopeFactory.CreateScope();
+            var updateHandler = scope.ServiceProvider.GetRequiredService<IHandlerUpdate>();
+
+            await _botClient.ReceiveAsync(updateHandler.HandleUpdateAsync, updateHandler.HandleErrorAsync,receiverOptions, stoppingToken);
         }
     }
 }

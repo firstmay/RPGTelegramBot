@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using RPGTgBot.Infrastructure.DataBaseContext;
 using RPGTgBot.Infrastructure.TelegramBot.Interfaces;
+using RPGTgBot.Infrastructure.TelegramBot.Menu;
+using RPGTgBot.Infrastructure.TelegramBot.Models;
 using RPGTgBot.Infrastructure.TelegramBot.Services;
 using Telegram.Bot;
 
@@ -23,8 +25,12 @@ namespace RPGTgBot.Presentation
 
             builder.Services.AddSingleton<ITelegramBotClient>(provider => new TelegramBotClient(tgToken));
             builder.Services.AddHostedService<TelegramBotService>();
-            builder.Services.AddSingleton<IHandlerUpdate, HandlerUpdate>();
-            
+            builder.Services.AddScoped<IHandlerUpdate, HandlerUpdate>();
+            builder.Services.AddScoped<IMessageHandler, MessageHandler>();
+            builder.Services.AddSingleton<UserStateService>();
+            builder.Services.AddSingleton<IMenuManager, MenuManager>();
+
+            builder.Services.AddScoped<MainMenu>();
             // Add services to the container.
 
 
